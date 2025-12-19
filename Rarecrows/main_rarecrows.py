@@ -7,8 +7,8 @@ import random as rand
 import time as t
 
 
-if __name__ == '__main__':
-    print('Для запуска скрипта нажмите "Enter"')
+if __name__ == '__main__':  # TODO Сделать десктопным
+    print('Для запуска скрипта нажмите "Enter"')  # TODO Несколько потоков
     print('Для завершения скрипта нажмите "Esc"')
     key.wait('enter', suppress=True)
     ops = False
@@ -16,7 +16,7 @@ if __name__ == '__main__':
         for i in set.coord:
             try:
                 pyautogui.locateOnScreen('image/ops.png', confidence=0.8, region=(0, 260, 480, 240))
-                x = rand.randint(30, 445)
+                x = rand.randint(30, 445)  # TODO Оформить поиск картинок как функции
                 y = rand.randint(445, 480)
                 pyautogui.click(x, y, duration=rand.uniform(0.2, 0.4), tween=pyautogui.easeInOutCubic)
                 ops = True
@@ -36,9 +36,11 @@ if __name__ == '__main__':
                         pyautogui.click(x, y, duration=rand.uniform(0.2, 0.4), tween=pyautogui.easeInOutCubic)
                         ops = False
                     if not ops:
-                        func.rand_click(i)
-                        if key.is_pressed("esc"):
-                            sys.exit()
-        t.sleep(rand.uniform(1, 3))
-
-
+                        try:
+                            pyautogui.locateOnScreen('image/gnomes.png', confidence=0.8, region=(0, 310, 80, 150))
+                            func.rand_click(i)  # TODO Добавить "промахивание" мышкой по грядке
+                            if key.is_pressed("esc"):
+                                sys.exit()
+                        except pyautogui.ImageNotFoundException:
+                            key.wait('enter', suppress=True)
+        t.sleep(rand.uniform(1, 3))  # TODO Добавить случайные события

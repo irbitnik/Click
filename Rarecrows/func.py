@@ -2,7 +2,7 @@ import random as rand
 import pyautogui as pag
 
 
-def rand_click(coord: tuple) -> None:
+def rand_click(coord: tuple) -> None:  # TODO Обернуть в класс
 
     x = rand.randint(coord[0], coord[1])
     y = rand.randint(coord[2], coord[3])
