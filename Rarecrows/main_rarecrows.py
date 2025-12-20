@@ -13,34 +13,36 @@ if __name__ == '__main__':  # TODO Сделать десктопным
     key.wait('enter', suppress=True)
     ops = False
     while True:
-        for i in set.coord:
+
+        x = rand.randint(85, 140)
+        y = rand.randint(195, 240)
+        pyautogui.click(x, y, duration=rand.uniform(0.5, 1), tween=pyautogui.easeInOutCubic)
+
+        for i in set.coord:  # TODO Оформить поиск картинок как функции
             try:
-                pyautogui.locateOnScreen('image/ops.png', confidence=0.8, region=(0, 260, 480, 240))
-                x = rand.randint(30, 445)  # TODO Оформить поиск картинок как функции
-                y = rand.randint(445, 480)
-                pyautogui.click(x, y, duration=rand.uniform(0.2, 0.4), tween=pyautogui.easeInOutCubic)
+                pyautogui.locateOnScreen('image/ops.png', grayscale=True, confidence=0.8, region=(0, 260, 480, 240))
+                func.rand_click((30, 445, 445, 480))
+                print('Обработка плохого интернет соединения')
                 ops = True
                 t.sleep(rand.randint(10, 20))
             except pyautogui.ImageNotFoundException:
                 try:
-                    pyautogui.locateOnScreen('image/load.png', confidence=0.8, region=(0, 260, 480, 240))
+                    pyautogui.locateOnScreen('image/load.png', grayscale=True, confidence=0.8, region=(0, 260, 480, 240))
                     t.sleep(rand.randint(10, 20))
                 except pyautogui.ImageNotFoundException:
                     if ops:
-                        x = rand.randint(425, 460)
-                        y = rand.randint(630, 660)
-                        pyautogui.click(x, y, duration=rand.uniform(0.2, 0.4), tween=pyautogui.easeInOutCubic)
+                        func.rand_click((425, 460, 630, 660))
                         t.sleep(rand.randint(3, 5))
-                        x = rand.randint(320, 365)
-                        y = rand.randint(625, 670)
-                        pyautogui.click(x, y, duration=rand.uniform(0.2, 0.4), tween=pyautogui.easeInOutCubic)
+                        func.rand_click((320, 365, 625, 670))
+                        print('Снова выбрал редиску')
                         ops = False
                     if not ops:
                         try:
-                            pyautogui.locateOnScreen('image/gnomes.png', confidence=0.8, region=(0, 310, 80, 150))
+                            pyautogui.locateOnScreen('image/gnomes.png', grayscale=True, confidence=0.8, region=(0, 310, 80, 150))
                             func.rand_click(i)  # TODO Добавить "промахивание" мышкой по грядке
                             if key.is_pressed("esc"):
                                 sys.exit()
                         except pyautogui.ImageNotFoundException:
-                            key.wait('enter', suppress=True)
-        t.sleep(rand.uniform(1, 3))  # TODO Добавить случайные события
+                            print("Не могу найти гномов")
+                            t.sleep(rand.randint(30, 50))
+        func.rand_event(rand.randint(1, 10))
