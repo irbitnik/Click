@@ -1,4 +1,4 @@
-import func
+from func import Image, MouseControl
 import set
 import sys
 import pyautogui
@@ -6,50 +6,65 @@ import keyboard as key
 import random as rand
 import time as t
 
+if __name__ == '__main__':
 
-if __name__ == '__main__':  # TODO Сделать десктопным
-
-    print('Для запуска скрипта нажмите "Enter"')  # TODO Несколько потоков
+    print('Для запуска скрипта нажмите "Enter"')
     print('Для завершения скрипта нажмите "Esc"')
     key.wait('enter', suppress=True)
 
     count = 0
-    ops = False
-    while count <= set.shovels/5:
+    mouse = MouseControl()
+    img_ops = Image('image/ops.png', (0, 260, 480, 240))
+    img_load = Image('image/load.png', (0, 260, 480, 240))
+    img_gnomes = Image('image/gnomes.png', (0, 310, 80, 150))
+    img_help = Image('image/help.png', (0, 260, 480, 100))
+    flag_ops = False
 
-        func.first_click()
+    while count <= set.shovels / 5:
+
+        mouse.rand_event(6)
+        mouse.first_click()
 
         for i in set.coord:
             try:
-                func.find_image('image/ops.png', (0, 260, 480, 240))
-                func.rand_click((30, 445, 445, 480))
-                print('Обработка плохого интернет соединения')
-                ops = True
-                t.sleep(rand.randint(10, 20))
+                img_help.find_image()
+                mouse.rand_click((30, 45, 270, 290))
+                print('Обработка хелпа')
+                t.sleep(rand.randint(2, 4))
             except pyautogui.ImageNotFoundException:
                 try:
-                    func.find_image('image/load.png', (0, 260, 480, 240))
+                    img_ops.find_image()
+                    mouse.rand_click((30, 445, 445, 480))
+                    print('Обработка плохого интернет соединения')
+                    ops = True
                     t.sleep(rand.randint(10, 20))
                 except pyautogui.ImageNotFoundException:
-                    if ops:
-                        func.rand_click((425, 460, 630, 660))
-                        t.sleep(rand.randint(3, 5))
-                        func.rand_click((320, 365, 625, 670))
-                        print('Выбрал редиску')
-                        ops = False
-                    if not ops:
-                        try:
-                            func.find_image('image/gnomes.png', (0, 310, 80, 150))
-                            func.rand_click(i)
-                            func.add_move()
-                            if key.is_pressed("esc"):
-                                sys.exit()
-                        except pyautogui.ImageNotFoundException:
-                            print("Не могу найти гномов")
-                            t.sleep(rand.randint(30, 50))
+                    try:
+                        img_load.find_image()
+                        t.sleep(rand.randint(10, 20))
+                    except pyautogui.ImageNotFoundException:
+                        if flag_ops:
+                            mouse.rand_click((425, 460, 630, 660))
+                            t.sleep(rand.randint(3, 5))
+                            mouse.rand_click((320, 365, 625, 670))
+                            print('Выбрал редиску')
+                            ops = False
+                        if not flag_ops:
+                            try:
+                                img_gnomes.find_image()
+                                mouse.rand_click(i)
+                                mouse.add_move()
+                                if key.is_pressed("esc"):
+                                    sys.exit()
+                            except pyautogui.ImageNotFoundException:
+                                print("Не могу найти гномов")
+                                t.sleep(rand.randint(30, 50))
 
-        func.rand_event(rand.randint(1, 10))
+        mouse.rand_event(rand.randint(1, 10))
 
         count += 1
         if count % 20 == 0:
-            print(f'Потрачено {count*5} лопат')
+            print(f'Потрачено {count * 5} лопат')
+
+    mouse.rand_event(4)
+    print('Лимит лопат на сегодня кончился')
