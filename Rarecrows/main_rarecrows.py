@@ -36,7 +36,7 @@ if __name__ == '__main__':
                     img_ops.find_image()
                     mouse.rand_click((30, 445, 445, 480))
                     print('Обработка плохого интернет соединения')
-                    ops = True
+                    flag_ops = True
                     t.sleep(rand.randint(10, 20))
                 except pyautogui.ImageNotFoundException:
                     try:
@@ -48,7 +48,7 @@ if __name__ == '__main__':
                             t.sleep(rand.randint(3, 5))
                             mouse.rand_click((320, 365, 625, 670))
                             print('Выбрал редиску')
-                            ops = False
+                            flag_ops = False
                         if not flag_ops:
                             try:
                                 img_gnomes.find_image()

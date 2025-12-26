@@ -3,12 +3,9 @@ import pyautogui as pag
 import time as t
 
 
-# TODO Обернуть в класс
-
-
 class Image:
 
-    def __init__(self, path: str, region: tuple):
+    def __init__(self, path: str, region: tuple) -> None:
         self.path = path
         self.region = region
 
