@@ -15,16 +15,13 @@ class Image:
 
 class MouseControl:
     @staticmethod
-    def first_click() -> None:
-        x = rand.randint(85, 140)
-        y = rand.randint(195, 240)
-        pag.click(x, y, duration=rand.uniform(0.5, 1), tween=pag.easeInOutCubic)
-
-    @staticmethod
     def rand_click(coord: tuple) -> None:
         x = rand.randint(coord[0], coord[1])
         y = rand.randint(coord[2], coord[3])
-        pag.click(x, y, duration=rand.uniform(0.1, 0.3), tween=pag.easeInOutCubic)
+        if coord == (85, 140, 195, 240):
+            pag.click(x, y, duration=rand.uniform(0.5, 1), tween=pag.easeInOutCubic)
+        else:
+            pag.click(x, y, duration=rand.uniform(0.1, 0.3), tween=pag.easeInOutCubic)
 
     @staticmethod
     def add_move() -> None:

@@ -20,10 +20,7 @@ if __name__ == '__main__':
     img_help = Image('image/help.png', (0, 260, 480, 100))
     flag_ops = False
 
-    while count <= set.shovels / 5:
-
-        mouse.rand_event(6)
-        mouse.first_click()
+    while count < set.shovels / 5:
 
         for i in set.coord:
             try:
@@ -51,16 +48,19 @@ if __name__ == '__main__':
                             flag_ops = False
                         if not flag_ops:
                             try:
+                                if rand.random() < 0.03:
+                                    continue
+                                if key.is_pressed("esc"):
+                                    sys.exit()
                                 img_gnomes.find_image()
                                 mouse.rand_click(i)
                                 mouse.add_move()
-                                if key.is_pressed("esc"):
-                                    sys.exit()
                             except pyautogui.ImageNotFoundException:
                                 print("Не могу найти гномов")
                                 t.sleep(rand.randint(30, 50))
 
         mouse.rand_event(rand.randint(1, 10))
+        mouse.rand_event(0)
 
         count += 1
         if count % 20 == 0:
