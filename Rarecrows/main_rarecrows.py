@@ -1,7 +1,6 @@
 from func import Image, MouseControl
 import set
 import sys
-import pyautogui
 import keyboard as key
 import random as rand
 import time as t
