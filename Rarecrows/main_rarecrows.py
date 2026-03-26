@@ -13,9 +13,8 @@ if __name__ == '__main__':
 
     count = 0
     mouse = MouseControl()
-    ops = Image('image/ops.png', (30, 445, 445, 480))
-    helping = Image('image/helping.png', (30, 45, 270, 290))
-    anons = Image('image/anons.png', (430, 455, 175, 205))
+    ops = Image('image/ops.png', (50, 500, 465, 500))
+    anons = Image('image/anons.png', (480, 520, 200, 240))
     gnomes = Image('image/gnomes.png')
 
     while count < set.shovels / 5:
@@ -26,22 +25,23 @@ if __name__ == '__main__':
             if key.is_pressed("esc"):
                 sys.exit()
             if anons.find_image():
+                t.sleep(rand.randint(2, 6))
                 mouse.rand_click(anons.click)
+                t.sleep(rand.randint(20, 40))
                 print('Обработка анонса')
-                t.sleep(rand.randint(2, 4))
-            if helping.find_image():
-                mouse.rand_click(helping.click)
-                print('Обработка хелпа')
-                t.sleep(rand.randint(2, 4))
             if ops.find_image():
+                t.sleep(rand.randint(2, 6))
                 mouse.rand_click(ops.click)
+                t.sleep(rand.randint(20, 40))
                 print('Обработка плохого интернет соединения')
-                t.sleep(rand.randint(10, 20))
             if gnomes.find_image():
                 mouse.rand_click(i)
                 mouse.add_move()
             else:
-                print("Не могу найти гномов")
+                print("Не могу найти гномов, обновляю игру")
+                mouse.rand_click(set.game_update_1)
+                t.sleep(rand.randint(2, 6))
+                mouse.rand_click(set.game_update_2)
                 t.sleep(rand.randint(30, 50))
 
         mouse.rand_event(rand.randint(1, 10))

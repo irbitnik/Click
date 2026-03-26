@@ -1,14 +1,15 @@
+from dataclasses import dataclass
+from typing import Optional, Tuple
 import random as rand
 import pyautogui
 import time as t
 import set
 
 
+@dataclass
 class Image:
-
-    def __init__(self, path: str, click: tuple = None) -> None:
-        self.path = path  # Путь к файлу
-        self.click = click  # Область для клика (x1, x2, y1, y2)
+    path: str  # Путь к файлу
+    click: Optional[Tuple[int, int, int, int]] = None  # Область для клика (x1, x2, y1, y2)
 
     def find_image(self) -> bool:
         try:
