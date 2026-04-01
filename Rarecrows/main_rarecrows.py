@@ -39,10 +39,7 @@ if __name__ == '__main__':
                 mouse.add_move()
             else:
                 print("Не могу найти гномов, обновляю игру")
-                mouse.rand_click(set.game_update_1)
-                t.sleep(rand.randint(2, 6))
-                mouse.rand_click(set.game_update_2)
-                t.sleep(rand.randint(30, 50))
+                mouse.page_update("web")
 
         mouse.rand_event(rand.randint(1, 10))
         mouse.rand_event(0)

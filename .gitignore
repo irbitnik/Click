@@ -1,0 +1,12 @@
+venv/
+.idea/
+test.py
+classes.py
+CLICK.py
+color.py
+cursor.py
+db.db
+main.py
+settings.py
+SUN.py
+parser.py

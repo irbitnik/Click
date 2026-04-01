@@ -84,3 +84,14 @@ class MouseControl:
                                       rand.randint(-10, 10),
                                       duration=rand.uniform(0.2, 0.4))
                 t.sleep(rand.uniform(1, 2))
+
+    @staticmethod
+    def page_update(type_game: str):
+        if type_game == "telegram":
+            MouseControl.rand_click(set.game_update_1)
+            t.sleep(rand.randint(2, 6))
+            MouseControl.rand_click(set.game_update_2)
+            t.sleep(rand.randint(30, 50))
+        if type_game == "web":
+            MouseControl.rand_click(set.game_update_web)
+            t.sleep(rand.randint(30, 50))
