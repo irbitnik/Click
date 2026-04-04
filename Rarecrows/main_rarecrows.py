@@ -1,4 +1,4 @@
-from func import Image, MouseControl
+import func
 import set
 import sys
 import keyboard as key
@@ -12,41 +12,31 @@ if __name__ == '__main__':
     key.wait('enter', suppress=True)
 
     count = 0
-    mouse = MouseControl()
-    ops = Image('image/ops.png', (50, 500, 465, 500))
-    anons = Image('image/anons.png', (480, 520, 200, 240))
-    gnomes = Image('image/gnomes.png')
+    gamer = func.Game()
+    gnomes = func.Image('image/gnomes.png')
 
     while count < set.shovels / 5:
 
-        for i in set.coord:
+        for i in gamer.coord:
             if rand.random() < 0.01:
                 continue
             if key.is_pressed("esc"):
                 sys.exit()
-            if anons.find_image():
-                t.sleep(rand.randint(2, 6))
-                mouse.rand_click(anons.click)
-                t.sleep(rand.randint(20, 40))
-                print('Обработка анонса')
-            if ops.find_image():
-                t.sleep(rand.randint(2, 6))
-                mouse.rand_click(ops.click)
-                t.sleep(rand.randint(20, 40))
-                print('Обработка плохого интернет соединения')
             if gnomes.find_image():
-                mouse.rand_click(i)
-                mouse.add_move()
+                gamer.rand_click(i)
+                gamer.add_move()
             else:
                 print("Не могу найти гномов, обновляю игру")
-                mouse.page_update("web")
+                t.sleep(rand.randint(2, 6))
+                gamer.page_update()
+                t.sleep(rand.randint(20, 40))
 
-        mouse.rand_event(rand.randint(1, 10))
-        mouse.rand_event(0)
+        gamer.rand_event(rand.randint(1, 10))
+        gamer.rand_event(0)
 
         count += 1
         if count % 20 == 0:
             print(f'Потрачено {count * 5} лопат')
 
-    mouse.rand_event(4)
+    gamer.rand_event(4)
     print('Лимит лопат на сегодня кончился')
