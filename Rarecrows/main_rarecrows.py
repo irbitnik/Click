@@ -1,5 +1,4 @@
 import func
-import set
 import sys
 import keyboard as key
 import random as rand
@@ -9,13 +8,19 @@ if __name__ == '__main__':
 
     print('Для запуска скрипта нажмите "Enter"')
     print('Для завершения скрипта нажмите "Esc"')
+    while True:
+        try:
+            shovels = int(input("Введите количество лопат: ")) + rand.randint(0, 100)
+            break
+        except ValueError:
+            print('Некорректный ввод, введите целое число')
     key.wait('enter', suppress=True)
 
     count = 0
     gamer = func.Game()
     gnomes = func.Image('image/gnomes.png')
 
-    while count < set.shovels / 5:
+    while count < shovels / 5:
 
         for i in gamer.coord:
             if rand.random() < 0.01:
