@@ -6,14 +6,15 @@ import time as t
 
 if __name__ == '__main__':
 
-    print('Для запуска скрипта нажмите "Enter"')
-    print('Для завершения скрипта нажмите "Esc"')
     while True:
         try:
             shovels = int(input("Введите количество лопат: ")) + rand.randint(0, 100)
             break
         except ValueError:
             print('Некорректный ввод, введите целое число')
+
+    print('Для запуска скрипта нажмите "Enter"')
+    print('Для завершения скрипта нажмите "Esc"')
     key.wait('enter', suppress=True)
 
     count = 0
@@ -26,6 +27,7 @@ if __name__ == '__main__':
             if rand.random() < 0.01:
                 continue
             if key.is_pressed("esc"):
+                print('Завершаю работу')
                 sys.exit()
             if gnomes.find_image():
                 gamer.rand_click(i)
