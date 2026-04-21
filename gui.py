@@ -1,18 +1,19 @@
 import tkinter as tk
+import tkinter.messagebox as messagebox
 
 
 def open_clicker(root):
 
-    while True:
-        try:
-            shovels = int(root.entry_shovels.get())
-            print(f'Farming starts at {shovels} shovels')
-            break
-        except ValueError:
-            print("Error: Please enter an integer!")
+    try:
+        shovels = int(root.entry_shovels.get())
+        print(f'Farming starts at {shovels} shovels')
+        from clicker_logic import main
+        main(shovels)
+    except ValueError:
+        print("Error: Please enter an integer!")
+        tk.messagebox.showerror("Invalid Input", "Please enter a valid integer for shovels!")
 
-    from clicker_logic import main
-    main(shovels)
+
 
 
 def create_gui():
@@ -50,7 +51,7 @@ def create_gui():
         font=("Arial", 12),
         bg="#4CAF50",
         fg="white",
-        command=open_clicker
+        command=lambda: open_clicker(root)
     )
     button_start.pack(pady=10)
 
