@@ -1,10 +1,6 @@
-import func
-import settings
-import sys
-import keyboard as key
-import random as rand
-import time as t
+from gui import create_gui
 
 if __name__ == '__main__':
 
-
+    root = create_gui()
+    root.mainloop()
