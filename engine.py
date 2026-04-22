@@ -2,14 +2,18 @@ from config import Settings
 from utils import Image, rand_click, add_move, rand_event
 import random as rand
 import keyboard as key
+import logging
 import sys
 import time as t
 
+logger = logging.getLogger(__name__)
+
 
 def main(shovels: int):
-    count = 0
 
+    count = 0
     gnomes = Image('image/gnomes.png')
+    logger.info(f'Farming starts at {shovels} shovels')
 
     while count < shovels / 5:
 
@@ -17,13 +21,13 @@ def main(shovels: int):
             if rand.random() < 0.01:
                 continue
             if key.is_pressed("esc"):
-                print('FATALITY')
+                logger.warning('FATALITY')
                 sys.exit()
             if gnomes.find_image():
                 rand_click(i)
                 add_move()
             else:
-                print("Can't find the gnomes, updating the game")
+                logger.warning("Can't find the gnomes, updating the game")
                 t.sleep(rand.randint(2, 6))
                 rand_click(Settings.GAME_UPDATE)
                 t.sleep(rand.randint(20, 40))
@@ -33,7 +37,7 @@ def main(shovels: int):
 
         count += 1
         if count % 20 == 0:
-            print(f'{count * 5} shovels wasted')
+            logger.info(f'{count * 5} shovels wasted')
 
     rand_event(4)
-    print('Shovel limit reached for today')
+    logger.info('Shovel limit reached for today')

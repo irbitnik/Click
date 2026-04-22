@@ -1,16 +1,16 @@
 import tkinter as tk
 import tkinter.messagebox as messagebox
+import random
+
 
 
 def open_clicker(root):
 
     try:
-        shovels = int(root.entry_shovels.get())
-        print(f'Farming starts at {shovels} shovels')
-        from clicker_logic import main
+        shovels = int(root.entry_shovels.get()) + random.randint(10, 200)
+        from engine import main
         main(shovels)
     except ValueError:
-        print("Error: Please enter an integer!")
         tk.messagebox.showerror("Invalid Input", "Please enter a valid integer for shovels!")
 
 
