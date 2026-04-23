@@ -1,51 +1,11 @@
 import tkinter as tk
-import tkinter.messagebox as messagebox
-import random
-import logging
-from typing import Any
-
-
-class TextHandler(logging.Handler):
-    """
-    Custom logging handler that outputs log records to a Tkinter Text widget.
-    """
-
-    def __init__(self, text_widget: tk.Text) -> None:
-        super().__init__()
-        self.text_widget = text_widget
-
-        self.text_widget.tag_configure("INFO", foreground="lime")
-        self.text_widget.tag_configure("WARNING", foreground="red")
-
-    def emit(self, record: logging.LogRecord) -> None:
-        msg = self.format(record)
-        tag = record.levelname
-
-        def append() -> None:
-            self.text_widget.configure(state='normal')
-            self.text_widget.insert(tk.END, msg + '\n', (tag,))
-            self.text_widget.configure(state='disabled')
-            self.text_widget.yview(tk.END)
-
-        self.text_widget.after(0, append)
-
-
-def open_clicker(root: tk.Tk) -> None:
-    """
-    Callback for the 'Run' button.
-    """
-    try:
-        shovels = int(root.entry_shovels.get()) + random.randint(10, 200)
-        from engine import main
-        main(shovels)
-    except ValueError:
-        messagebox.showerror("Invalid Input", "Please enter a valid integer for shovels!")
+from utils import open_clicker
 
 
 def create_gui() -> tk.Tk:
     """
-    Creates the main GUI window with two sections:
-    - Left: Controls (input field and start button)
+    Creates the main application window with two panels:
+    - Left: Input field and start button
     - Right: Log output area
     """
     root = tk.Tk()
@@ -53,7 +13,7 @@ def create_gui() -> tk.Tk:
     root.geometry("700x500")
     root.configure(bg="#2e2e2e")
 
-    # === LEFT PANEL: Settings ===
+    # === LEFT PANEL: Controls ===
     left_frame = tk.Frame(root, bg="#2e2e2e")
     left_frame.pack(side=tk.LEFT, padx=20, pady=20, anchor="nw")
 
@@ -91,7 +51,7 @@ def create_gui() -> tk.Tk:
 
     label_info = tk.Label(
         left_frame,
-        text="Press 'Esc' to stop the script",
+        text="Press 'Esc' to stop the farming",
         font=("Arial", 12),
         bg="#2e2e2e",
         fg="white"
@@ -121,23 +81,11 @@ def create_gui() -> tk.Tk:
     )
     log_text.pack(fill=tk.BOTH, expand=True, pady=(5, 0))
 
-    # Scrollbar for log text
     scrollbar = tk.Scrollbar(log_text)
     scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
     log_text.config(yscrollcommand=scrollbar.set)
     scrollbar.config(command=log_text.yview)
 
     root.log_text = log_text
-
-    # === SET UP LOGGING TO TEXT WIDGET ===
-    text_handler = TextHandler(log_text)
-    formatter = logging.Formatter(
-        '%(asctime)s | %(levelname)-6s | %(name)s | %(message)s',
-        datefmt='%H:%M:%S'
-    )
-    text_handler.setFormatter(formatter)
-    logger = logging.getLogger()
-    logger.addHandler(text_handler)
-    logger.setLevel(logging.INFO)
 
     return root

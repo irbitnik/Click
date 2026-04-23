@@ -1,11 +1,11 @@
 class Settings:
-    # Регион игрового поля: X и Y верхнего левого угла, ширина и высота
+    # Game region: (x, y, width, height) of the top-left corner of the game area
     GAME_REGION = (0, 85, 680, 635)
 
-    # (x1, x2, y1, y2) Координаты обновления игры
+    # (x1, x2, y1, y2) Coordinates for refreshing the game screen
     GAME_UPDATE = (50, 70, 50, 70)
 
-    # (x1, x2, y1, y2) Координаты грядок
+    # (x1, x2, y1, y2) Coordinates of garden beds (planting spots)
     COORD = ((180, 240, 210, 270),
              (270, 320, 210, 270),
              (350, 410, 210, 270),
