@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 def main(shovels: int):
-
     count = 0
     gnomes = Image('image/gnomes.png')
     logger.info(f'Farming starts at {shovels} shovels')
