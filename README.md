@@ -32,8 +32,6 @@ click/
 ├── config.py             # Screen coordinates and regions
 ├── tests/                # Unit tests
 │   └── test_utils.py
-├── image/                # Image templates for detection
-│   └── gnomes.png
 ├── requirements.txt      # Dependencies
 └── README.md             # This file
 
