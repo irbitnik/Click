@@ -22,22 +22,22 @@ def create_gui() -> tk.Tk:
 
     label = tk.Label(
         frame_input,
-        text="Shovels:",
+        text="Tools:",
         font=("Arial", 12),
         bg="#2e2e2e",
         fg="white"
     )
     label.grid(row=0, column=0, padx=(0, 10), sticky="w")
 
-    entry_shovels = tk.Entry(
+    entry_tools = tk.Entry(
         frame_input,
         font=("Arial", 14),
         width=7,
         justify='center'
     )
-    entry_shovels.insert(0, str(3000))
-    entry_shovels.grid(row=0, column=1, sticky="e")
-    root.entry_shovels = entry_shovels
+    entry_tools.insert(0, str(3000))
+    entry_tools.grid(row=0, column=1, sticky="e")
+    root.entry_tools = entry_tools
 
     button_start = tk.Button(
         left_frame,

@@ -10,7 +10,7 @@ class TestImage(unittest.TestCase):
     def test_find_image_found(self, mock_locate):
         """Test: image is found on screen"""
         mock_locate.return_value = (100, 100, 50, 50)
-        img = Image("image/gnomes.png")
+        img = Image("image/work_image.png")
         result = img.find_image()
         self.assertTrue(result)
 
@@ -18,7 +18,7 @@ class TestImage(unittest.TestCase):
     def test_find_image_not_found(self, mock_locate):
         """Test: image not found — returns False"""
         mock_locate.side_effect = pyautogui.ImageNotFoundException
-        img = Image("image/gnomes.png")
+        img = Image("image/work_image.png")
         result = img.find_image()
         self.assertFalse(result)
 

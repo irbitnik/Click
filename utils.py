@@ -55,11 +55,11 @@ def open_clicker(root: tk.Tk) -> None:
 
     def run_in_thread():
         try:
-            shovels = int(root.entry_shovels.get()) + random.randint(10, 200)
+            tools = int(root.entry_tools.get()) + random.randint(10, 200)
             from engine import main
-            main(shovels)
+            main(tools)
         except ValueError:
-            root.after(0, lambda: messagebox.showerror("Invalid Input", "Please enter a valid integer for shovels!"))
+            root.after(0, lambda: messagebox.showerror("Invalid Input", "Please enter a valid integer for tools!"))
 
     thread = threading.Thread(target=run_in_thread, daemon=True)
     thread.start()
