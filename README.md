@@ -29,7 +29,6 @@ click/
 ├── engine.py             # Core farming loop
 ├── gui.py                # Tkinter-based UI
 ├── utils.py              # Utilities: clicks, movement, logging
-├── config.py             # Screen coordinates and regions
 ├── tests/                # Unit tests
 │   └── test_utils.py
 ├── requirements.txt      # Dependencies
