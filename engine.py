@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def main(tools: int):
     count = 0
     work_image = Image('image/work_image.png')
-    logger.info(f'Farming starts at {tools} shovels')
+    logger.info(f'Farming starts at {tools} tools')
 
     while count < tools / 5:
         for coord in Settings.COORD:
@@ -34,8 +34,6 @@ def main(tools: int):
         rand_event(0)
 
         count += 1
-        if count % 20 == 0:
-            logger.info(f'{count * 5} tools wasted')
 
     rand_event(4)
     logger.info('Tools limit reached for today')
